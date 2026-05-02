@@ -9,5 +9,5 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_list(request):
-    posts = Post.objects.filter(is_published=True, rate__gt=5)
+    posts = Post.objects.filter(is_published=True, rate__gte=5)
     return render(request, 'blog/post_list.html', {'posts': posts})

@@ -6,9 +6,8 @@
     <p><strong>Рейтинг:</strong> {{ post.rate }}</p>
     <p><strong>Опубликован:</strong> {{ post.is_published|yesno:"Да,Нет" }}</p>
     <p><strong>Создан:</strong> {{ post.created_at }}</p>
-    <p><strong>Обновлён:</strong> {{ post.updated_at }}</p>
     <hr>
-    <p>{{ post.content }}</p>
+    <p>{{ post.body }}</p>
     <a href="{% url 'post_list' %}">← Назад к списку</a>
 </body>
 </html>
