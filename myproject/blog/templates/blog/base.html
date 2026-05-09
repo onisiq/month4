@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Блог{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'post_list' %}">Посты</a>
+        <a href="{% url 'post_create' %}">Создать пост</a>
+        <a href="{% url 'category_create' %}">Создать категорию</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head><title>{{ post.title }}</title></head>
-<body>
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
     <h1>{{ post.title }}</h1>
+    {% if post.category %}
+        <p><strong>Категория:</strong> {{ post.category }}</p>
+    {% endif %}
     <p><strong>Рейтинг:</strong> {{ post.rate }}</p>
     <p><strong>Опубликован:</strong> {{ post.is_published|yesno:"Да,Нет" }}</p>
     <p><strong>Создан:</strong> {{ post.created_at }}</p>
     <hr>
     <p>{{ post.body }}</p>
     <a href="{% url 'post_list' %}">← Назад к списку</a>
-</body>
-</html>
+{% endblock %}

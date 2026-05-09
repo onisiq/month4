@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head><title>Посты</title></head>
-<body>
+{% extends 'blog/base.html' %}
+
+{% block title %}Посты{% endblock %}
+
+{% block content %}
     <h1>Опубликованные посты с рейтингом выше 5</h1>
     {% if posts %}
         {% for post in posts %}
             <div>
                 <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+                {% if post.category %}
+                    <p>Категория: {{ post.category }}</p>
+                {% endif %}
                 <p>Рейтинг: {{ post.rate }}</p>
                 <p>{{ post.body|truncatewords:20 }}</p>
                 <hr>
@@ -15,5 +19,4 @@
     {% else %}
         <p>Нет подходящих постов.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}
