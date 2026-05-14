@@ -8,8 +8,19 @@
         {% for post in posts %}
             <div>
                 <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 300px; height: auto;">
+                {% endif %}
                 {% if post.category %}
                     <p>Категория: {{ post.category }}</p>
+                {% endif %}
+                {% if post.tags.all %}
+                    <p>
+                        Тэги:
+                        {% for tag in post.tags.all %}
+                            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
                 {% endif %}
                 <p>Рейтинг: {{ post.rate }}</p>
                 <p>{{ post.body|truncatewords:20 }}</p>
