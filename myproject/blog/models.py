@@ -24,6 +24,8 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=200)
     body = models.TextField()
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    tags = models.ManyToManyField('Tag', related_name='posts', blank=True)
     is_published = models.BooleanField(default=True)
     rate = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,9 +33,13 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class Tags(models.Model):
+
+class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name

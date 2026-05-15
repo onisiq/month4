@@ -1,7 +1,22 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
 from .models import Post, Tag
+
+
+class RegisterViewTests(TestCase):
+    def test_register_creates_and_logs_in_user(self):
+        response = self.client.post(reverse('register'), {
+            'username': 'new_user',
+            'email': 'new_user@example.com',
+            'password1': 'StrongPass123',
+            'password2': 'StrongPass123',
+        })
+
+        self.assertRedirects(response, reverse('post_list'))
+        self.assertTrue(User.objects.filter(username='new_user').exists())
+        self.assertEqual(int(self.client.session['_auth_user_id']), User.objects.get(username='new_user').pk)
 
 
 class PostCreateViewTests(TestCase):

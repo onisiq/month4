@@ -9,6 +9,11 @@
         <a href="{% url 'post_list' %}">Посты</a>
         <a href="{% url 'post_create' %}">Создать пост</a>
         <a href="{% url 'category_create' %}">Создать категорию</a>
+        {% if user.is_authenticated %}
+            <span>Вы вошли как {{ user.username }}</span>
+        {% else %}
+            <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
     </nav>
     <hr>
     {% block content %}{% endblock %}
