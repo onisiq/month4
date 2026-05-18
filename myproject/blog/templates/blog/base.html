@@ -6,29 +6,21 @@
 </head>
 <body>
     <nav>
-        <!-- Эти ссылки ведут на страницы по их name из urls.py -->
         <a href="{% url 'post_list' %}">Посты</a>
         <a href="{% url 'post_create' %}">Создать пост</a>
         <a href="{% url 'category_create' %}">Создать категорию</a>
-
-        <!-- Проверяем: пользователь уже вошел или нет -->
         {% if user.is_authenticated %}
-            <span>Вы вошли как {{ user.username }}</span>
-
-            <!-- LogoutView принимает POST-запрос, поэтому выход делаем через форму -->
+            <span>Аккаунт: {{ user.username }}</span>
             <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit">Выйти</button>
             </form>
         {% else %}
-            <!-- Если пользователь не вошел, показываем вход и регистрацию -->
             <a href="{% url 'login' %}">Войти</a>
             <a href="{% url 'register' %}">Регистрация</a>
         {% endif %}
     </nav>
     <hr>
-
-    <!-- Сюда другие шаблоны вставляют свой контент -->
     {% block content %}{% endblock %}
 </body>
 </html>

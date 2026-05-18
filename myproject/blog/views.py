@@ -95,4 +95,4 @@ class PostListView(ListView):
     def get_queryset(self):
         # Показываем только опубликованные посты с рейтингом 5 или выше.
         # select_related('category') заранее подтягивает категорию, чтобы было меньше запросов к базе.
-        return Post.objects.select_related('category').filter(is_published=True, rate__gte=5)
+        return Post.objects.select_related('category').filter(is_published=True, rate__gte=5,)
